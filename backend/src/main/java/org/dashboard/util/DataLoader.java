@@ -14,6 +14,11 @@ public class DataLoader implements ApplicationRunner {
   @Autowired
   private ProductRepo productRepo;
 
+  @Autowired
+  public DataLoader(ProductRepo productRepository) {
+    this.productRepo = productRepository;
+  }
+
   @Override
   public void run(org.springframework.boot.ApplicationArguments args) throws Exception {
 

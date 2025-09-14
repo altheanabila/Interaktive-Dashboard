@@ -25,6 +25,10 @@ public class ProductService {
   public Product saveProduct(Product product){
     return productRepo.save(product);
   }
+  public List<Product> searchProducts(String searchTerm) {
+    return productRepo.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(
+            searchTerm, searchTerm);
+  }
 
   public void deleteProduct(Long id){
     productRepo.deleteById(id);
@@ -33,6 +37,7 @@ public class ProductService {
   public List<Product> getProductsByCategory(String category) {
     return productRepo.findByCategory(category);
   }
+
 
   }
 
