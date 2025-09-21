@@ -1,0 +1,8 @@
+[phases.setup]
+nixPkgs = ["maven", "jdk17"]
+
+[phases.build]
+commands = ["mvn clean package"]
+
+[phases.start]
+command = "java -jar target/*.jar --server.port=$PORT"
