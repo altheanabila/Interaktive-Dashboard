@@ -1,9 +1,9 @@
 [build]
 builder = "nixpacks"
-buildCommand = "cd /app && mvn clean package"
+buildCommand = "cd /app/backend && mvn clean package && ls -la /app/backend/target/"
 
 [deploy]
-startCommand = "cd /app && java -jar backend/target/InteraktiveDashboard-1.0-SNAPSHOT.jar --server.port=$PORT"
+startCommand = "cd /app && ls -la backend/target/ && java -jar backend/target/*.jar --server.port=$PORT"
 
 [deploy.healthcheck]
 port = 8080
