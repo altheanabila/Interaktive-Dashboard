@@ -1,9 +1,9 @@
 [build]
 builder = "nixpacks"
-buildCommand = "cd backend && mvn clean package"
+buildCommand = "cd /app/backend && mvn clean package"
 
 [deploy]
-startCommand = "cd backend && java -jar target/*.jar --server.port=$PORT"
+startCommand = "cd /app && java -jar backend/target/*.jar --server.port=$PORT"
 
 [deploy.healthcheck]
 port = 8080
