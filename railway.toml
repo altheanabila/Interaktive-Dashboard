@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-
+dockerfilePath = "backend/Dockerfile"
 
 [deploy]
 startCommand = "java -jar backend/target/*.jar --server.port=$PORT"
