@@ -75,7 +75,13 @@
                 <version>3.2.4</version>
                 <!-- ADD THIS CONFIGURATION -->
                 <configuration>
-                    <mainClass><org class="dashboard InteraktiveDashboard"></org>Application</mainClass>
+                    <mainClass>org.dashboard.InteraktiveDashboardApplication</mainClass>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
                 </configuration>
                 <executions>
                     <execution>
