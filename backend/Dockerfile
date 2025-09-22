@@ -1,10 +1,10 @@
-# Use official Maven image with Java 17
+# Use working Maven image
 FROM maven:3.8.6-eclipse-temurin-17 AS build
 
 # Set working directory
 WORKDIR /app
 
-# Copy only the backend files
+# Copy the backend files (from the backend directory context)
 COPY pom.xml .
 COPY src ./src
 
@@ -24,4 +24,4 @@ COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
 
 # Run the application
-CMD ["java", "-jar", "app.jar", "--server.port=8080"]-server.port=8080"]
+CMD ["java", "-jar", "app.jar", "--server.port=8080"]
