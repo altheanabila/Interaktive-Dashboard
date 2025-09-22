@@ -3,7 +3,7 @@ builder = "nixpacks"
 dockerfilePath = "backend/Dockerfile"
 
 [deploy]
-startCommand = "java -jar backend/target/*.jar --server.port=$PORT"
+startCommand = "java -jar backend/target/InteraktiveDashboard-1.0-SNAPSHOT.jar --server.port=$PORT"
 
 [deploy.healthcheck]
 port = 8080
