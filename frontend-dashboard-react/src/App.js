@@ -14,6 +14,7 @@ function App() {
 
     // ✅ Base URL from environment variable (fallback to localhost for dev)
     const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+    axios.get(`${API_URL}/api/products`);
 
     useEffect(() => {
         fetchProducts();
