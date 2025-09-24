@@ -25,7 +25,7 @@ function App() {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/products`);
+            const response = await axios.get(`${API_URL}/api/products`);
             setProducts(response.data);
             setLoading(false);
         } catch (error) {
@@ -167,7 +167,7 @@ function App() {
                     <div className="modal">
                         <h2>{editingProduct.id ? 'Edit Product' : 'Create Product'}</h2>
                         <form onSubmit={handleSubmit}>
-                            {/* ... form code unchanged ... */}
+                            {/* ... your form fields remain the same ... */}
                         </form>
                     </div>
                 </div>
