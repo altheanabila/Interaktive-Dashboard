@@ -20,25 +20,30 @@ const Dashboard = () => {
         averagePrice: 0
     });
 
+    // ✅ Use environment variable for API URL
+    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+    axios.get(`${API_URL}/api/products`);
+
     useEffect(() => {
         fetchData();
     }, []);
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/products');
+            const response = await axios.get(`${API_URL}/api/products`);
             const productsData = response.data;
 
             setProducts(productsData);
 
             // Calculate statistics
-            const totalValue = productsData.reduce((sum, product) => sum + product.price, 0);
-            const averagePrice = productsData.length > 0 ? totalValue / productsData.length : 0;
+            const totalValue = productsData.reduce((sum, product) => sum + product.price * product.stockQuantity, 0);
+            const totalProducts = productsData.length;
+            const averagePrice = totalProducts > 0 ? totalValue / totalProducts : 0;
 
             setStats({
-                totalProducts: productsData.length,
-                totalValue: totalValue,
-                averagePrice: averagePrice
+                totalProducts,
+                totalValue,
+                averagePrice
             });
 
             setLoading(false);

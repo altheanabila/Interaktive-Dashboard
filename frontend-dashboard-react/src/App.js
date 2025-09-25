@@ -13,8 +13,8 @@ function App() {
     const [showForm, setShowForm] = useState(false);
 
     // ✅ Base URL from environment variable (fallback to localhost for dev)
-    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
-    axios.get(`${API_URL}/api/products`);
+    const API_URL = process.env.REACT_APP_API_URL;
+
 
     useEffect(() => {
         fetchProducts();
