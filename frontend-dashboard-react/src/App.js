@@ -35,6 +35,7 @@ function App() {
         }
     };
 
+
     const filterAndSortProducts = () => {
         let filtered = products.filter(product =>
             product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

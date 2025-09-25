@@ -113,6 +113,7 @@ const Dashboard = () => {
                 </Grid>
             </Grid>
 
+
             {/* Products Table */}
             <Paper sx={{ width: '100%' }}>
                 <DataGrid
