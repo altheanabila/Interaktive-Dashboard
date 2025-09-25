@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/products")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://interaktive-dashboard-3p9w.vercel.app")
 public class ProductController {
 
   @Autowired
@@ -35,6 +35,8 @@ public class ProductController {
   public Product createProduct(@RequestBody Product product) {
     return productService.saveProduct(product);
   }
+
+
 
   // UPDATE existing product
   @PutMapping("/{id}")
