@@ -12,9 +12,7 @@ function App() {
     const [editingProduct, setEditingProduct] = useState(null);
     const [showForm, setShowForm] = useState(false);
 
-    // ✅ Base URL from environment variable (fallback to localhost for dev)
     const API_URL = process.env.REACT_APP_API_URL;
-
 
     useEffect(() => {
         fetchProducts();
@@ -66,7 +64,7 @@ function App() {
         if (window.confirm('Are you sure you want to delete this product?')) {
             try {
                 await axios.delete(`${API_URL}/api/products/${id}`);
-                fetchProducts(); // Refresh the list
+                fetchProducts();
                 alert('Product deleted successfully!');
             } catch (error) {
                 console.error('Error deleting product:', error);
@@ -80,15 +78,23 @@ function App() {
         try {
             if (editingProduct.id) {
                 // Update existing product
-                await axios.put(`${API_URL}/api/products/${editingProduct.id}`, editingProduct);
+                await axios.put(
+                    `${API_URL}/api/products/${editingProduct.id}`,
+                    editingProduct,
+                    { headers: { 'Content-Type': 'application/json' } }
+                );
             } else {
                 // Create new product
-                await axios.post(`${API_URL}/api/products`, editingProduct);
+                await axios.post(
+                    `${API_URL}/api/products`,
+                    editingProduct,
+                    { headers: { 'Content-Type': 'application/json' } }
+                );
             }
 
             setShowForm(false);
             setEditingProduct(null);
-            fetchProducts(); // Refresh the list
+            fetchProducts();
             alert('Product saved successfully!');
         } catch (error) {
             console.error('Error saving product:', error);
@@ -105,11 +111,8 @@ function App() {
     };
 
     const categories = ['All', ...new Set(products.map(p => p.category))];
-    const productCategories = [...new Set(products.map(p => p.category))];
 
-    if (loading) {
-        return <div className="App">Loading products...</div>;
-    }
+    if (loading) return <div className="App">Loading products...</div>;
 
     return (
         <div className="App">
@@ -131,7 +134,6 @@ function App() {
                 + Add New Product
             </button>
 
-            {/* Search and Filter Controls */}
             <div className="controls">
                 <input
                     type="text"
@@ -162,19 +164,50 @@ function App() {
                 </select>
             </div>
 
-            {/* Edit/Create Form */}
             {showForm && (
                 <div className="modal-overlay">
                     <div className="modal">
                         <h2>{editingProduct.id ? 'Edit Product' : 'Create Product'}</h2>
                         <form onSubmit={handleSubmit}>
-                            {/* ... your form fields remain the same ... */}
+                            <input
+                                name="name"
+                                placeholder="Name"
+                                value={editingProduct.name}
+                                onChange={handleInputChange}
+                                required
+                            />
+                            <input
+                                name="description"
+                                placeholder="Description"
+                                value={editingProduct.description}
+                                onChange={handleInputChange}
+                            />
+                            <input
+                                name="price"
+                                type="number"
+                                placeholder="Price"
+                                value={editingProduct.price}
+                                onChange={handleInputChange}
+                            />
+                            <input
+                                name="category"
+                                placeholder="Category"
+                                value={editingProduct.category}
+                                onChange={handleInputChange}
+                            />
+                            <input
+                                name="stockQuantity"
+                                type="number"
+                                placeholder="Stock Quantity"
+                                value={editingProduct.stockQuantity}
+                                onChange={handleInputChange}
+                            />
+                            <button type="submit">Save</button>
                         </form>
                     </div>
                 </div>
             )}
 
-            {/* Statistics */}
             <div className="stats">
                 <div className="stat-card">
                     <h3>Total Products</h3>
@@ -190,7 +223,6 @@ function App() {
                 </div>
             </div>
 
-            {/* Products Grid */}
             <div className="products-container">
                 {filteredProducts.length === 0 ? (
                     <p>No products found matching your criteria.</p>
@@ -203,18 +235,8 @@ function App() {
                             <p><strong>Category:</strong> {product.category}</p>
                             <p><strong>Stock:</strong> {product.stockQuantity}</p>
                             <div className="product-actions">
-                                <button
-                                    className="btn-edit"
-                                    onClick={() => handleEdit(product)}
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    className="btn-delete"
-                                    onClick={() => handleDelete(product.id)}
-                                >
-                                    Delete
-                                </button>
+                                <button className="btn-edit" onClick={() => handleEdit(product)}>Edit</button>
+                                <button className="btn-delete" onClick={() => handleDelete(product.id)}>Delete</button>
                             </div>
                         </div>
                     ))
