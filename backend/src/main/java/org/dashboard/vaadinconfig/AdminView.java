@@ -11,6 +11,7 @@ import org.dashboard.model.Product;
 import org.dashboard.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 @Route("admin")
 public class AdminView extends VerticalLayout {
 
